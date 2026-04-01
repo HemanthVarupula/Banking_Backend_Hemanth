@@ -13,18 +13,20 @@ senderRouter.get("/getsenderlist/:userid",async(req,res)=>{
     });
      res.json(users);
 })
-senderRouter.post("/sendmoney/:senderId",async(req,res)=>{
+senderRouter.post("/sendmoney/:senderId/:reciverId",async(req,res)=>{
   const senderId=req.params.senderId;
-  const reciverId=req.body.reciverId;
+  const receiverId=req.params.reciverId;
+  // const reciverId=req.body.reciverId;
   const amount=req.body.amount;
-  const updateamount=await User.findByIdAndUpdate(reciverId,{$inc:{balance:amount}},{new:true})
+  const userupdateamount=await User.findByIdAndUpdate(senderId,{$inc:{balance:-amount}},{new:true})
+  const updateamount=await User.findByIdAndUpdate(receiverId,{$inc:{balance:amount}},{new:true})
  const historyDoc = new History({
   senderId,
-  receiverId: reciverId,
+  receiverId: receiverId,
   amount
 });
 
 const history = await historyDoc.save();
-  res.json({message:"amount send sucessfully",data:history,updateamount:updateamount})
+  res.json({message:"amount send sucessfully",data:history,updateamount:updateamount,userupdateamount:userupdateamount})
 })
 module.exports=senderRouter
