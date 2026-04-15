@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 3000
         env:
-        - name: MONGO_URI              
+        - name: Db_url              
           valueFrom:
             secretKeyRef:
               name: backend-secret     
