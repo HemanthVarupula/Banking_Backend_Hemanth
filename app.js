@@ -4,7 +4,7 @@ const connectDb = require("./src/config/database");
 const cors=require("cors")
 const app=express();
 app.use(express.json())
-app.use(cors({origin:"http://98.93.220.37:30007",credentials: true}))
+app.use(cors({origin:"http://54.234.107.39:30007",credentials: true}))
 const authRouter=require("./src/Routes/auth");
 const transactionsRouter=require("./src/Routes/transaction")
 const contactRouter=require("./src/Routes/contact")
